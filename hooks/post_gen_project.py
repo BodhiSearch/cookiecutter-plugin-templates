@@ -1,22 +1,23 @@
 #!/usr/bin/env python
 import os
+import shutil
 
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
 
 def remove_file(filepath):
-    os.remove(os.path.join(PROJECT_DIRECTORY, filepath))
+    target = os.path.join(PROJECT_DIRECTORY, filepath)
+    if os.path.exists(target):
+        os.remove(target)
 
+def remove_dir(dirname):
+    if os.path.exists(dirname):
+        shutil.rmtree(dirname)
 
 if __name__ == '__main__':
 
-    if '{{ cookiecutter.create_author_file }}' != 'y':
-        remove_file('AUTHORS.rst')
-        remove_file('docs/authors.rst')
-
-    if 'no' in '{{ cookiecutter.command_line_interface|lower }}':
-        cli_file = os.path.join('{{ cookiecutter.project_slug }}', 'cli.py')
-        remove_file(cli_file)
+    if '{{ cookiecutter.create_doc_files }}' != 'y':
+        remove_dir('docs')
 
     if 'Not open source' == '{{ cookiecutter.open_source_license }}':
         remove_file('LICENSE')
