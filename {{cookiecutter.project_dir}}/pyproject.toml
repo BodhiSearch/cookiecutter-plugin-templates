@@ -1,12 +1,16 @@
 [tool.poetry]
-name = "{{ cookiecutter._project_kebab}}"
+name = "{{ cookiecutter.project_slug}}"
 version = "0.1.0"
 description = "{{ cookiecutter.project_short_description }}"
-authors = ["{{ cookiecutter.full_name | default('') }}{{ '<' + email + '>' if email else '' }}"]
+{% if cookiecutter.email -%}
+authors = [ "{{ cookiecutter.full_name | default('') }}{{ ' <' + cookiecutter.email + '>' if cookiecutter.email else '' }}" ]
+{% else -%}
+authors = []
+{% endif -%}
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.8.0,<3.12"
+python = "^3.8.1,<3.12"
 bodhisearch = "^0.1.0"
 
 [tool.poetry.group.test.dependencies]

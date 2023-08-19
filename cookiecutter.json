@@ -4,7 +4,7 @@
   "github_username": "BodhiSearch",
   "project_name": "My Awesome LLM",
   "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
-  "_project_kebab": "{{ cookiecutter.project_slug.replace('_', '-') }}",
+  "project_dir": "{{ cookiecutter.project_slug.replace('_', '-') }}",
   "project_short_description": "BodhiSearch plugin for my awesome LLM",
   "pypi_username": "{{ cookiecutter.github_username }}",
   "version": "0.1.0",
