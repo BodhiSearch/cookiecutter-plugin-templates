@@ -26,6 +26,9 @@ flake8 = "^6.1.0"
 mypy = "^1.4.1"
 ruff = "^0.0.284"
 
+[tool.poetry.group.docs.dependencies]
+sphinx-nested-apidoc = "^1.2.4"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
