@@ -16,6 +16,7 @@ bodhisearch = "^0.1.0"
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.0"
 pytest-socket = "^0.6.0"
+pytest-dotenv = "^0.5.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.7.0"
@@ -58,5 +59,50 @@ exclude = '''
   | buck-out
   | build
   | dist
+  | docs
 )/
 '''
+
+[tool.mypy]
+python_version = 3.8
+warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+disallow_incomplete_defs = true
+exclude = ["docs"]
+
+[tool.ruff]
+target-version = "py38"
+select = ["E", "F", "B"]
+ignore = []
+fixable = ["ALL"]
+unfixable = []
+exclude = [
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".git-rewrite",
+  ".hg",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".pytype",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "build",
+  "dist",
+  "node_modules",
+  "venv",
+  "docs",
+]
+per-file-ignores = {}
+line-length = 120
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+fix = true
