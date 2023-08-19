@@ -1,0 +1,58 @@
+[tool.poetry]
+name = "{{ cookiecutter._project_kebab}}"
+version = "0.1.0"
+description = "{{ cookiecutter.project_short_description }}"
+authors = ["{{ cookiecutter.full_name | default('') }}{{ '<' + email + '>' if email else '' }}"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8.0,<3.12"
+bodhisearch = "^0.1.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.0"
+pytest-socket = "^0.6.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.7.0"
+pre-commit = "^3.3.3"
+flake8 = "^6.1.0"
+mypy = "^1.4.1"
+ruff = "^0.0.284"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests_{{ cookiecutter.project_slug }}"]
+filterwarnings = ["error"]
+markers = [
+  "all: tagged on all tests using hooks in conftest.py",
+  "live: calls external APIs (skipped by default)",
+]
+addopts = '-m "not live"'
+env_files = [".env.test"]
+
+
+[tool.poetry.plugins.bodhisearch]
+{{ cookiecutter.project_slug }} = "{{ cookiecutter.project_slug }}.llm"
+
+[tool.black]
+line-length = 120
+target-version = ['py38']
+preview = true
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
