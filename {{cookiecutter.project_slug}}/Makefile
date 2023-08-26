@@ -55,7 +55,7 @@ test-all: ## run all tests including integration tests
 	poetry run pytest -m all
 
 coverage: ## check code coverage quickly with the default Python
-	poetry run pytest --cov-report html --cov=src tests_{{ cookiecutter.project_slug }}
+	poetry run pytest --cov-report html --cov=src tests_{{ cookiecutter.__project_underscore }}
 	$(BROWSER) htmlcov/index.html
 
 docs: ## generate Sphinx HTML documentation, including API docs
