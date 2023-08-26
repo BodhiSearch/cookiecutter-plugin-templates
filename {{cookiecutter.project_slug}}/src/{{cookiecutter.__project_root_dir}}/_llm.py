@@ -3,7 +3,7 @@ from typing import Any, Dict
 
 from bodhilib.logging import logger
 from bodhilib.llm import LLM
-from bodhilib.prompt import Prompt, PromptInput, parse_prompts, prompt_output
+from bodhilib.models import Prompt, PromptInput, parse_prompts, prompt_output
 
 
 class {{ cookiecutter.__llm_class }}(LLM):

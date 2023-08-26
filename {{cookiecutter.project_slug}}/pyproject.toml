@@ -4,9 +4,10 @@ version = "0.1.0"
 description = "{{ cookiecutter.project_short_description }}"
 authors = []
 readme = "README.md"
+packages = [{ include = "{{ cookiecutter.__project_root_dir }}", from = "src" }]
 
 [tool.poetry.dependencies]
-python = "^3.8.1,<3.12"
+python = "^3.8.1,<4"
 bodhilib = "^0.1.0"
 
 [tool.poetry.group.test.dependencies]
