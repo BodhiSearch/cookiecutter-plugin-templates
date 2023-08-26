@@ -8,7 +8,11 @@ from ._llm import {{ cookiecutter.__llm_class }}
 
 @service_provider
 def bodhilib_list_services() -> List[Service]:
-    """List all services provided by this plugin for bodhilib to register."""
+    """List all services provided by this plugin for bodhilib to register.
+
+    Returns:
+        List[Service]: list of services provided by this plugin
+    """
     return [
         Service(
             service_name="{{ cookiecutter.__service_name }}",
@@ -28,5 +32,9 @@ def {{ cookiecutter.__project_underscore}}_{{ cookiecutter.__service_type}}_serv
     api_key: Optional[str] = None,
     **kwargs: Dict[str, Any],
 ) -> {{ cookiecutter.__llm_class }}:
-    """LLM service builder for {{ cookiecutter.project_name }} LLM Service."""
+    """LLM service builder for Awesome LLM Service LLM Service.
+
+    Returns:
+        BodhilibAnthropic: Bodhilib LLM service implementation for Awesome LLM Service
+    """
     return {{cookiecutter.__llm_class}}(model=model, api_key=api_key, **kwargs)

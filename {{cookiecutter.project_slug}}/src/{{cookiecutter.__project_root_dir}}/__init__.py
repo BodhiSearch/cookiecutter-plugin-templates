@@ -4,3 +4,5 @@ from ._plugin import {{ cookiecutter.__project_underscore}}_{{ cookiecutter.__se
 from ._plugin import bodhilib_list_services as bodhilib_list_services
 
 __version__ = "{{ cookiecutter.version }}"
+
+__all__ = ["{{ cookiecutter.__llm_class }}", "{{ cookiecutter.__project_underscore}}_{{ cookiecutter.__service_type}}_service_builder", "bodhilib_list_services"]

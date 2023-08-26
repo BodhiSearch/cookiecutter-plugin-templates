@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 docs_dir = Path(os.path.dirname(__file__))
-src_dir = docs_dir / ".." / "src"
+src_dir = docs_dir / ".." / ".." / "src"
 sys.path.insert(0, str(src_dir.resolve()))
 
 # -- General configuration ---------------------------------------------
