@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import os
 import shutil
+import subprocess
 
 PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
@@ -33,3 +34,7 @@ if __name__ == "__main__":
         shutil.move(f"src/{project_root_dir}", dest_dir)
         shutil.rmtree("src")
         os.rename("tmp", "src")
+
+        subprocess.call(["git", "init", "-q"])
+        subprocess.call(["git", "add", "*"])
+        subprocess.call(["git", "commit", "-q", "-m", "bodhilib plugin template setup"])

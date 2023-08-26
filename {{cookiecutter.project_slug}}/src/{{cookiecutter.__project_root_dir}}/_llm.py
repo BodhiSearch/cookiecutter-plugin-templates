@@ -1,13 +1,14 @@
-"""LLM implementation for {{ cookiecutter.project_name }}"""
-from typing import Any, Dict
+"""LLM implementation for {{ cookiecutter.project_name }}."""
+from typing import Any, Dict, Optional
 
-from bodhilib.logging import logger
 from bodhilib.llm import LLM
+from bodhilib.logging import logger
 from bodhilib.models import Prompt, PromptInput, parse_prompts, prompt_output
 
 
 class {{ cookiecutter.__llm_class }}(LLM):
-    def __init__(self, model: str, api_key: str, **kwargs: Dict[str, Any]) -> None:
+    """{{ cookiecutter.project_name }} LLM Service implementation."""
+    def __init__(self, model: Optional[str] = None, api_key: Optional[str] = None, **kwargs: Dict[str, Any]) -> None:
         self.model = model
         self.api_key = api_key
         self.kwargs = kwargs
