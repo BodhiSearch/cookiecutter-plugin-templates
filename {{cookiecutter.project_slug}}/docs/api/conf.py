@@ -15,14 +15,15 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinxcontrib.autodoc_pydantic",
     "sphinx_copybutton",
+    "myst_parser",
 ]
 
-templates_path = ['_templates']
-source_suffix = ['.rst', '.md']
-master_doc = 'index'
+templates_path = ["_templates"]
+source_suffix = [".rst", ".md", ".ipynb", ".myst"]
+master_doc = "index"
 
 # General information about the project.
-project = '{{ cookiecutter.project_name }}'
+project = "{{ cookiecutter.project_name }}"
 copyright = "{% now 'local', '%Y' %}, {{ cookiecutter.org_name }}"
 author = "{{ cookiecutter.org_name }}"
 
@@ -33,13 +34,13 @@ author = "{{ cookiecutter.org_name }}"
 
 language = "en"
 
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
-pygments_style = 'sphinx'
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+pygments_style = "sphinx"
 todo_include_todos = False
 
 # -- Options for HTML output -------------------------------------------
-html_theme = 'sphinx_book_theme'
-html_static_path = ['_static']
+html_theme = "sphinx_book_theme"
+html_static_path = ["_static"]
 
 intersphinx_mapping = {
     "python": ("https://docs.python.org/", None),

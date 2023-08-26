@@ -62,7 +62,7 @@ docs: ## generate Sphinx HTML documentation, including API docs
 	docs/build_docs.sh
 
 servedocs: docs ## compile the docs watching for changes
-	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
+	python -m http.server -d docs/api/_build -b localhost 8000
 
 release: dist ## package and upload a release
 	poetry publish
