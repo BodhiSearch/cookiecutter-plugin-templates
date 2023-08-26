@@ -18,3 +18,10 @@ repos:
     hooks:
       - id: flake8
         exclude: docs
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.3.0
+    hooks:
+      - id: pydocstyle
+        files: ^.*\/(src)\/.*
+        additional_dependencies:
+          - 'pydocstyle[toml]'

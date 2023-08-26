@@ -1,4 +1,4 @@
-from {{ cookiecutter.project_slug }}.llm import {{ cookiecutter.__llm_class }}
+from {{ cookiecutter.project_slug }} import {{ cookiecutter.__llm_class }}
 
 
 def test_call_returns_the_answer_to_life():

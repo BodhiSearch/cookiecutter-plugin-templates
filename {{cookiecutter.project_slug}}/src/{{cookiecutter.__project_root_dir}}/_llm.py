@@ -1,16 +1,9 @@
+"""LLM implementation for {{ cookiecutter.project_name }}"""
 from typing import Any, Dict
-import bodhisearch
-from bodhisearch import Provider, LLM, logger
-from bodhisearch.prompt import Prompt, PromptInput, parse_prompts, prompt_output
 
-
-@bodhisearch.provider
-def bodhisearch_get_providers():
-    return [Provider(provider="{{ cookiecutter.project_slug }}", author="{{ cookiecutter.github_username | default('author-here') }}", type="llm", func=get_llm, version="{{ cookiecutter.version }}")]
-
-
-def get_llm(provider: str, model: str, api_key: str = "", **kwargs: Dict[str, Any]) -> LLM:
-    return {{ cookiecutter.__llm_class }}(model=model, api_key=api_key, **kwargs)
+from bodhilib.logging import logger
+from bodhilib.llm import LLM
+from bodhilib.prompt import Prompt, PromptInput, parse_prompts, prompt_output
 
 
 class {{ cookiecutter.__llm_class }}(LLM):

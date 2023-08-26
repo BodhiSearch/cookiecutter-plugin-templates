@@ -2,16 +2,12 @@
 name = "{{ cookiecutter.project_slug}}"
 version = "0.1.0"
 description = "{{ cookiecutter.project_short_description }}"
-{% if cookiecutter.email -%}
-authors = ["{{ cookiecutter.full_name | default('') }}{{ ' <' + cookiecutter.email + '>' if cookiecutter.email else '' }}"]
-{% else -%}
 authors = []
-{% endif -%}
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8.1,<3.12"
-bodhisearch = "^0.1.0"
+bodhilib = "^0.1.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.0"
@@ -34,7 +30,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
-testpaths = ["tests_{{ cookiecutter.project_slug }}"]
+testpaths = ["tests_{{ cookiecutter.__project_underscore }}"]
 filterwarnings = ["error"]
 markers = [
   "all: tagged on all tests using hooks in conftest.py",
@@ -44,8 +40,8 @@ addopts = '-m "not live"'
 env_files = [".env.test"]
 
 
-[tool.poetry.plugins.bodhisearch]
-{{ cookiecutter.project_slug }} = "{{ cookiecutter.project_slug }}.llm"
+[tool.poetry.plugins.bodhilib]
+"{{ cookiecutter.project_slug }}" = "{{ cookiecutter.project_slug }}"
 
 [tool.black]
 line-length = 120
