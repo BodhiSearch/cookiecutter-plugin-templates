@@ -1,0 +1,123 @@
+[tool.poetry]
+name = "{{ cookiecutter.project_package}}"
+version = "{{ cookiecutter.version }}"
+description = "{{ cookiecutter.project_short_description }}"
+authors = []
+readme = "README.md"
+packages = [{ include = "{{ cookiecutter.__project_root_dir }}", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.8.1,<3.12"
+bodhilib = "^0.1.0"
+pydantic = "^1"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
+pytest-socket = "^0.6.0"
+pytest-dotenv = "^0.5.2"
+pytest-timeout = "^2.1.0"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.3.3"
+mypy = "^1.4.1"
+ruff = "^0.0.284"
+codespell = "^2.2.5"
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.1.2"
+sphinx-copybutton = "^0.5.2"
+sphinx-rtd-theme = "^1.3.0"
+pydocstyle = "^6.3.0"
+toml = "^0.10.2"
+myst-parser = "^2.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.plugins.bodhilib]
+"{{ cookiecutter.project_package }}" = "{{ cookiecutter.project_package }}"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests_{{ cookiecutter.__project_underscore }}"]
+filterwarnings = ["error"]
+markers = [
+  "all: tagged on all tests using hooks in conftest.py",
+  "live: calls external APIs (skipped by default)",
+]
+addopts = '-m "not live"'
+env_files = [".env.test"]
+
+[tool.black]
+line-length = 120
+target-version = ['py38']
+preview = true
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.mypy]
+python_version = 3.8
+plugins = ['pydantic.mypy']
+exclude = ['test\_.*', 'conftest\.py', 'docs/conf\.py']
+mypy_path = ["src"]
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+explicit_package_bases = true
+ignore_missing_imports = true
+namespace_packages = true
+warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[tool.ruff]
+target-version = "py38"
+select = ["E", "F", "B"]
+ignore = []
+fixable = ["ALL"]
+unfixable = []
+exclude = [
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".git-rewrite",
+  ".hg",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".pytype",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "build",
+  "dist",
+  "node_modules",
+  "venv",
+]
+per-file-ignores = {}
+line-length = 120
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+fix = true
+
+[tool.pydocstyle]
+match = "(?!test_|conftest).*\\.py"
+add_ignore = "D102, D107"
+convention = "google"

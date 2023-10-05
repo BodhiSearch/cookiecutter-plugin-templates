@@ -26,9 +26,9 @@ if __name__ == "__main__":
     if "Not open source" == "{{ cookiecutter.open_source_license }}":
         remove_file("LICENSE")
 
-    project_slug = "{{ cookiecutter.project_slug }}"
+    project_package = "{{ cookiecutter.project_package }}"
     project_root_dir = "{{ cookiecutter.__project_root_dir }}"
-    slugs = project_slug.split(".")
+    slugs = project_package.split(".")
     if len(slugs) > 1:
         dest_dir = "/".join(["tmp"] + slugs)
         shutil.move(f"src/{project_root_dir}", dest_dir)

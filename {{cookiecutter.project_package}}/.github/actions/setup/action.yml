@@ -1,0 +1,81 @@
+{% raw -%}
+# action.yml
+# https://github.com/actions/setup-python/issues/505#issuecomment-1273013236
+name: poetry-install-with-caching
+description: Poetry install with support for caching of dependency groups.
+
+inputs:
+  python-version:
+    description: Python version, supporting MAJOR.MINOR only
+    required: true
+    default: '3.8'
+
+  pipx-version:
+    description: Pipx version
+    required: false
+    default: 1.2.0
+
+  poetry-version:
+    description: Poetry version
+    required: false
+    default: 1.5.1
+
+  install-command:
+    description: Command run for installing dependencies
+    required: false
+    default: make install
+
+  working-directory:
+    description: Directory to run install-command in
+    required: false
+    default: '.'
+
+  setup-only:
+    description: Only setup the environment if cache does not exists
+    required: false
+    default: 'false'
+
+runs:
+  using: composite
+  steps:
+    - name: Set the cache key
+      id: poetry-cache-key
+      shell: bash
+      run: |
+        echo "POETRY_CACHE_KEY=poetry-${{ runner.os }}-${{ runner.arch }}-py-${{ inputs.python-version }}-${{ inputs.poetry-version }}-${{ hashFiles('poetry.lock') }}" >> $GITHUB_ENV
+        echo "POETRY_CACHE_KEY=poetry-${{ runner.os }}-${{ runner.arch }}-py-${{ inputs.python-version }}-${{ inputs.poetry-version }}-${{ hashFiles('poetry.lock') }}"
+    - name: Check Poetry cache
+      id: check-poetry-cache
+      shell: bash
+        env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        gh extension install actions/gh-actions-cache
+        KEY=${{ env.POETRY_CACHE_KEY }}
+        CACHE_HIT=$(gh actions-cache list --key $KEY | grep -q $KEY && echo 'true' || echo 'false')
+        echo "POETRY_CACHE_HIT=$CACHE_HIT" >> $GITHUB_ENV
+        echo "POETRY_CACHE_HIT=$CACHE_HIT"
+    - uses: actions/setup-python@v4
+      if: inputs.setup-only == 'false' || env.POETRY_CACHE_HIT == 'false'
+      with:
+        python-version: ${{ inputs.python-version }}
+    - uses: actions/cache@v3
+      if: inputs.setup-only == 'false' || env.POETRY_CACHE_HIT == 'false'
+      id: cache-pip
+      env:
+        SEGMENT_DOWNLOAD_TIMEOUT_MIN: '15'
+      with:
+        path: |
+          ~/.cache/pip
+          ~/.cache/pypoetry/virtualenvs
+          ~/.cache/pypoetry/cache
+          ~/.cache/pypoetry/artifacts
+        key: poetry-${{ runner.os }}-${{ runner.arch }}-py-${{ inputs.python-version }}-${{ inputs.poetry-version }}-${{ hashFiles('poetry.lock') }}
+    - run: pipx install poetry==${{ inputs.poetry-version }} --python python${{ inputs.python-version }}
+      shell: bash
+      if: inputs.setup-only == 'false' || env.POETRY_CACHE_HIT == 'false'
+    - run: ${{ inputs.install-command }}
+      working-directory: ${{ inputs.working-directory }}
+      shell: bash
+      if: inputs.setup-only == 'false' || env.POETRY_CACHE_HIT == 'false'
+{% endraw -%}
