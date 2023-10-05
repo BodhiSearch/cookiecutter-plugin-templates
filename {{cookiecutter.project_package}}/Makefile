@@ -54,6 +54,9 @@ test: ## run unit tests
 test-all: ## run all tests including integration tests
 	poetry run pytest -m all
 
+check:
+	poetry check --lock
+
 coverage: ## check code coverage quickly with the default Python
 	poetry run pytest --cov-report html --cov=src tests_{{ cookiecutter.__project_underscore }}
 	$(BROWSER) htmlcov/index.html

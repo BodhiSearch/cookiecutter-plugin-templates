@@ -1,4 +1,6 @@
 """{{ cookiecutter.project_name }} LLM Service module."""
+from __future__ import annotations
+
 from typing import Any, Dict, List, Optional, Union
 
 from bodhilib import BaseLLM, Prompt, PromptStream, Service, prompt_output, service_provider

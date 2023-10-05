@@ -26,9 +26,6 @@ project_package
 project_short_description
     A 1-sentence description of what your Python package does.
 
-pypi_username
-    Your Python Package Index account username.
-
 version
     The starting version number of the package.
 

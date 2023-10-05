@@ -18,7 +18,7 @@ inputs:
   poetry-version:
     description: Poetry version
     required: false
-    default: 1.5.1
+    default: 1.6.1
 
   install-command:
     description: Command run for installing dependencies
@@ -47,7 +47,7 @@ runs:
     - name: Check Poetry cache
       id: check-poetry-cache
       shell: bash
-        env:
+      env:
         GH_TOKEN: ${{ github.token }}
       run: |
         gh extension install actions/gh-actions-cache

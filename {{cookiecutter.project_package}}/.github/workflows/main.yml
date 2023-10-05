@@ -1,6 +1,5 @@
-{% raw -%}
 name: {{ cookiecutter.project_name }} CI/CD
-
+{% raw -%}
 on:
   pull_request:
   push:
